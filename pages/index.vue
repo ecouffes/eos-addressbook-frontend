@@ -159,9 +159,7 @@
       const result = await eos.getTableRows(true, CONTRACT_ACCOUNT, account.name, 'people')
 
       const eosContract = await eos.contract(CONTRACT_ACCOUNT)
-
-      console.dir(account.name)
-
+      
       return { eos, eosContract, account, contacts: result.rows }
     },
 
