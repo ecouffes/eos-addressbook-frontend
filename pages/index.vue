@@ -73,6 +73,7 @@
   import ScatterJS from 'scatter-js/dist/scatter.esm'
 
   // Kylin Testnet Account
+  // TODO ユーザーアカウントはハードコーディングしているので、dataのthis.accountへ修正
   const CONTRACT_ACCOUNT = 'eosaddressbk'
   const USER_ACCOUNT = 'eosaddressbk'
 
