@@ -73,9 +73,7 @@
   import ScatterJS from 'scatter-js/dist/scatter.esm'
 
   // Private network account
-  // TODO ユーザーアカウントはハードコーディングしているので、dataのthis.accountへ修正
   const CONTRACT_ACCOUNT = 'eosaddressbk'
-  const USER_ACCOUNT = 'eosaddressbk'
 
   export default {
     data () {
@@ -159,11 +157,9 @@
       const eos = scatter.eos(network, Eos, eosOptions)
       window.scatter = null
 
-      const result = await eos.getTableRows(true, CONTRACT_ACCOUNT, USER_ACCOUNT, 'people')
+      const result = await eos.getTableRows(true, CONTRACT_ACCOUNT, account.name, 'people')
 
       const eosContract = await eos.contract(CONTRACT_ACCOUNT)
-
-      console.dir(account.name)
 
       return { eos, eosContract, account, contacts: result.rows }
     },
@@ -171,7 +167,7 @@
     methods: {
       // EOSブロックチェーンのMulti index tableを参照してcontactsデータを更新
       async refreshcontracts () {
-        const result = await this.eos.getTableRows(true, CONTRACT_ACCOUNT, USER_ACCOUNT, 'people')
+        const result = await this.eos.getTableRows(true, CONTRACT_ACCOUNT, this.account.name, 'people')
         this.contacts = result.rows
       },
 
