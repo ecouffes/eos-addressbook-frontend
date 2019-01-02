@@ -73,8 +73,9 @@
   import ScatterJS from 'scatter-js/dist/scatter.esm'
 
   // Private network account
-  const CONTRACT_ACCOUNT = 'addressbook'
-  const USER_ACCOUNT = 'bob'
+  // TODO ユーザーアカウントはハードコーディングしているので、dataのthis.accountへ修正
+  const CONTRACT_ACCOUNT = 'eosaddressbk'
+  const USER_ACCOUNT = 'eosaddressbk'
 
   export default {
     data () {
