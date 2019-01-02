@@ -140,7 +140,7 @@
       }
 
       // ScatterにLink
-      const connected = await ScatterJS.scatter.connect('EOS Addressbook')
+      const connected = await ScatterJS.scatter.connect('EOS Privatenet Addressbook')
       if (!connected) return false
 
       const scatter = ScatterJS.scatter
