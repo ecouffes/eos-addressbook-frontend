@@ -194,7 +194,7 @@
           this.eosContract.destroy(
             this.account.name,
             contact.id,
-            { authorization: `${this.account.name}@owner` }
+            { authorization: this.account.name }
           ).then(result => {
             this.warning = 'トランザクションを送信しました'
           }).then(async () => {
@@ -223,7 +223,7 @@
           this.modalContact.name,
           this.modalContact.address,
           this.modalContact.tel,
-          { authorization: `${this.account.name}@owner` }
+          { authorization: this.account.name }
         ).then(result => {
           this.warning = 'トランザクションを送信しました'
         }).then(async () => {
@@ -243,7 +243,7 @@
           this.modalContact.name,
           this.modalContact.address,
           this.modalContact.tel,
-          { authorization: `${this.account.name}@owner` }
+          { authorization: this.account.name }
         ).then(result => {
           this.warning = 'トランザクションを送信しました'
         }).then(async () => {
