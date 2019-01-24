@@ -130,6 +130,17 @@
 
     async asyncData (context) {
 
+      const scatter = ScatterJS.scatter
+
+      // ユーザーのScatterにconnect
+      const connected = await scatter.connect('EOS Privatenet Addressbook', { initTimeout: 5000 })
+      if (connected) {
+        window.scatter = null
+      } else {
+        console.log('Please use Scatter application to enter this DApp!')
+        return false
+      }
+
       // Private Network info
       const network = {
         blockchain: 'eos',
@@ -139,27 +150,21 @@
         chainId: 'cf057bbfb72640471fd910bcb67639c22df9f92470936cddc1ade0e2f2e7dc4f'
       }
 
-      // ScatterにLink
-      const connected = await ScatterJS.scatter.connect('EOS Privatenet Addressbook')
-      if (!connected) return false
-
-      const scatter = ScatterJS.scatter
-      const requiredFields = { accounts: [network] }
-
       // Scatterにnetwork情報を渡す
+      const requiredFields = { accounts: [network] }
       await scatter.getIdentity(requiredFields)
 
-      // Scatterから選択したeosのアカウントを取得
+      // ScatterからEOS Blockchainのアカウントを取得
       const account = scatter.identity.accounts.find(x => x.blockchain === 'eos')
-      const eosOptions = { expireInSeconds: 60 }
 
-      // Scatterを用いてeosオブジェクトを生成
+      const eosOptions = { expireInSeconds: 60 }
+      // Scatterを使ってトランザクションへの署名を可能にするeosjsオブジェクトへの参照を取得
       const eos = scatter.eos(network, Eos, eosOptions)
-      window.scatter = null
+
+      // EOSコントラクトオブジェクトを作成
+      const eosContract = await eos.contract(CONTRACT_ACCOUNT)
 
       const result = await eos.getTableRows(true, CONTRACT_ACCOUNT, account.name, 'people')
-
-      const eosContract = await eos.contract(CONTRACT_ACCOUNT)
 
       return { eos, eosContract, account, contacts: result.rows }
     },
